@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ytBnI+ArmPZUrmlLueMg5+TWoZbCl1BmYahNGuJQfimLT5UnoJSJ6iu47lyxmj2N0btkjynDQL7uJ4eGXKCfvw==",
+  "success": true,
+  "projectFilePath": "D:\\研究所\\SLBlock\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Username\\.nuget\\packages\\grasshopper\\7.34.23267.11001\\grasshopper.7.34.23267.11001.nupkg.sha512",
+    "C:\\Users\\Username\\.nuget\\packages\\rhinocommon\\7.34.23267.11001\\rhinocommon.7.34.23267.11001.nupkg.sha512"
+  ],
+  "logs": []
+}
