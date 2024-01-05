@@ -14,7 +14,7 @@ namespace SGSFramework.Core.Parser.SyntaxTree
     public class LALR1ParsingString: LR1ParsingString<LALR1KernelItem>
     {
         public string cmd => _cmd;
-        private string _cmd = "================SLRParsingString============\n";
+        private string _cmd = "================LALRParsingString============\n";
         public IParsingTable<BaseLR1ActionDictionary<LALR1KernelItem>> parsingTable { get; }
         public string Sentence;
         public SyntaxTree Tree { get; set; }

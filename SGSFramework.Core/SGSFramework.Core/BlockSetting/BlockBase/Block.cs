@@ -88,7 +88,16 @@ namespace SGSFramework.Core.BlockSetting.BlockBase
         {
             for(int i = 0; i < Shapes.ToList().Count; i++)
                 this.AddComponent(Shapes.ToList()[i], Atts.ToList()[i]);
-           
+        }
+        /// <summary>
+        /// Add a set of geometries with the same objectattributes into this block
+        /// </summary>
+        /// <param name="Shapes"></param>
+        /// <param name="SameAtt"></param>
+        public virtual void AddRangeComponent(IEnumerable<GeometryBase> Shapes, ObjectAttributes SameAtt)
+        {
+            for (int i = 0; i < Shapes.ToList().Count; i++)
+                this.AddComponent(Shapes.ToList()[i], SameAtt);
         }
         /// <summary>
         /// Remove component from this block

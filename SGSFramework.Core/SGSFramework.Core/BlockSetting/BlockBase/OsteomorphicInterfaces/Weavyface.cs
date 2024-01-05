@@ -19,6 +19,17 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
 
         public override bool Equals(OsteoBlockface other)
         => this.ZSize == other.ZSize && this.IsFlip == other.IsFlip && this.Location == other.Location;
+        /// <summary>
+        /// Clone this interface
+        /// </summary>
+        /// <returns></returns>
+        public override object Clone()
+        {
+            var Temp = new Weavyface(this.ZSize, this.IsFlip);
+            Temp.Location = this.Location;
+            Temp.FaceColor = this.FaceColor;
+            return Temp;
+        }
         protected override void SetShape()
         {
             double size = Util.GeneralSetting.SegUnit;
@@ -28,10 +39,14 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
             {
                 XYsize[i] = size / 9 * i - size / 2;
                 if (IsFlip)
-                    Zsize[i] = this.ZSize - (Math.Sin((i / 4.5 - 1) * Math.PI * 0.5) * this.ZSize);
+                    Zsize[i] = -(Math.Sin((i / 4.5 - 1) * Math.PI * 0.5) * this.ZSize);
                 else
                     Zsize[i] = Math.Sin((i / 4.5 - 1) * Math.PI * 0.5) * this.ZSize;
             }
+            var PointList1 = PointAggragte(0).ToList();
+            var PointList2 = PointAggragte(1).ToList();
+            var PointList3 = PointAggragte(2).ToList();
+            var PointList4 = PointAggragte(3).ToList();
             this._Perphery = new List<Curve>()
             {
                 Curve.CreateInterpolatedCurve(PointAggragte(0), 3),
@@ -39,7 +54,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
                 Curve.CreateInterpolatedCurve(PointAggragte(2), 3),
                 Curve.CreateInterpolatedCurve(PointAggragte(3), 3)
             };
-            
+            this._Face = Brep.CreateEdgeSurface(this._Perphery);
             if (this.IsFlip)
             {
                 this._AlignPlane = Plane.WorldXY;
@@ -53,6 +68,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
 
             IEnumerable<Point3d> PointAggragte(int Position)
             {
+
                 for (int i = 0; i <= 9; i++)
                     switch (Position)
                     {
@@ -63,10 +79,10 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
                             yield return new Point3d(-size / 2, XYsize[i], Zsize[i]);
                             break;
                         case (2):
-                            yield return new Point3d(XYsize[i], size / 2, Zsize[i]);
+                            yield return new Point3d(XYsize[i], size / 2, Zsize[9 - i]);
                             break;
                         case (3):
-                            yield return new Point3d(size / 2, XYsize[i], Zsize[i]);
+                            yield return new Point3d(size / 2, XYsize[i], Zsize[9 - i]);
                             break;
                         default:
                             break;

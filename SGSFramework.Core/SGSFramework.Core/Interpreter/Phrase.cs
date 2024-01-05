@@ -13,7 +13,7 @@ namespace SGSFramework.Core.Interpreter
 
     input rule type
     //if compactingName or vocabulary don't spell preferable
-    #defined CompactingName I Voxel_I
+    #defined CompatibleName I Voxel_I
     #defined Vocabulary H H_1
     //if compactingName or vocabulary has duplicated and 
     //list on the output of labelblocktable cmd

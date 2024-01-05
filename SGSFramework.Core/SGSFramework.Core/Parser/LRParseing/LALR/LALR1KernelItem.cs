@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SGSFramework.Core.Parser.Grammar;
 
 namespace SGSFramework.Core.Parser.LRParseing.LALR
-{
+{   
     public class LALR1KernelItem : BaseLR1KernelItem, IEquatable<LALR1KernelItem>
     {
         public override HashSet<string> LookAheads => this._lookAheads;

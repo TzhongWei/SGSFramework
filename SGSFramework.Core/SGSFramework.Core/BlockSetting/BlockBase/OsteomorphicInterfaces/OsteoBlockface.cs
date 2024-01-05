@@ -9,9 +9,9 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
 {
     public abstract class OsteoBlockface : ICloneable, IEquatable<OsteoBlockface>
     {
-        public Brep Face => Alignment<Brep>(this.Face);
-        public List<Curve> Perphery => this.Perphery.Select(x => Alignment<Curve>(x)).ToList();
-        public Plane AlignPlane { get { var Temp = this.AlignPlane.Clone(); Temp.Transform(OrientTS); return Temp; } }
+        public Brep Face => Alignment<Brep>(this._Face);
+        public List<Curve> Perphery => this._Perphery.Select(x => Alignment<Curve>(x)).ToList();
+        public Plane AlignPlane { get { var Temp = this._AlignPlane.Clone(); Temp.Transform(OrientTS); return Temp; } }
         protected ObjectT Alignment<ObjectT>(ObjectT OrientGeometry) where ObjectT : GeometryBase
         {
             var Temp = OrientGeometry.Duplicate();
@@ -19,21 +19,18 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
             return (ObjectT) Temp;
         }
         protected Transform OrientTS => Transform.PlaneToPlane(this._AlignPlane, this.Location);
-        public static OsteoBlockface Unset { get; }
+        public static OsteoBlockface Default { get; }
         public int index;
         static OsteoBlockface()
         {
-            Unset._AlignPlane = Plane.Unset;
+            Default = new Weavyface(1.25);
+            Default.index = -1;
         }
-
-        protected OsteoBlockface()
-        {
-            SetShape();
-        }
-        protected OsteoBlockface(double Height, bool IsFlip) : this()
+        protected OsteoBlockface(double Height, bool IsFlip)
         {
             this.ZSize = Height;
             this.IsFlip = IsFlip;
+            SetShape();
         }
         public Plane Location { get; set; } = Plane.WorldXY;
         public Color FaceColor;
@@ -51,7 +48,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
         /// <summary>
         /// To determine the orientation between 0 and 90 degree
         /// </summary>
-        public bool IsFlip { get; }
+        public bool IsFlip { get; private set; }
         public double ZSize { get; protected set; }
         public abstract string TypeName { get; }
         protected abstract Brep _Face { get; set; }
@@ -70,12 +67,8 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
         protected abstract void SetShape();
         public override string ToString()
             => TypeName;
-        public virtual object Clone() => this.Clone<OsteoBlockface>();
-        public Face Clone<Face>() where Face : OsteoBlockface
-        {
-            Face Temp = (Face)Activator.CreateInstance(typeof(Face), this.ZSize, this.IsFlip);
-            return Temp;
-        }
+        public abstract object Clone();
+
         public abstract bool Equals(OsteoBlockface other);
         public static bool IsSameType(params OsteoBlockface[] faces)
         {
@@ -85,6 +78,21 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
                 if (FaceType != faces[i].TypeName)
                     return false;
             }
+            return true;
+        }
+        public virtual bool SetFlip()
+        {
+            if (_Face == null || this._Perphery == null)
+                return false;
+            this.IsFlip = !this.IsFlip;
+            var RotateTS = Transform.Mirror(this._AlignPlane);
+            this._Face.Transform(RotateTS);
+            this._Perphery = this._Perphery.Select(x =>
+            {
+                x.Transform(RotateTS);
+                return x;
+            }).ToList();
+            this._AlignPlane.Rotate(Math.PI * 0.5, Vector3d.ZAxis);
             return true;
         }
         public virtual bool Mirror()

@@ -40,5 +40,10 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
             }
 
         }
+
+        public override object Clone()
+        {
+            return new Planarface(IsFlip);
+        }
     }
 }
