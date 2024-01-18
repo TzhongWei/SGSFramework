@@ -449,6 +449,16 @@ namespace SGSFramework.Core.Grammar
         public bool SetRules()
         {
             var Rules = OriginalRule;
+            List<string> TempRule = new List<string>(); 
+            foreach (var Rule in Rules)
+            {
+                if (!Rule.Contains("//"))
+                {
+                    TempRule.Add(Rule);
+                }
+            }
+            Rules = TempRule;
+
             if (Preprocessor(ref Rules))
             {
                 var RulePairs = GenerateRule(Rules).ToList();
@@ -684,7 +694,9 @@ namespace SGSFramework.Core.Grammar
             ///Remove Compatible name from production rule
             string CleanProRule(string OriProRule)
             {
-                var words = OriProRule.Split(' ').ToList();
+                var Heading = Util.Util.CleanSequence(OriProRule.Split('=')[0]) + " =";
+                var Content = Util.Util.CleanSequence(OriProRule.Split('=')[1]);
+                var words = Content.Split(' ').ToList();
                 var NewBody = new List<string>();
                 for (int i = 0; i < words.Count; i++)
                 {
@@ -696,7 +708,14 @@ namespace SGSFramework.Core.Grammar
                         continue;
                     NewBody.Add(words[i]);
                 }
-                return string.Join(" ", NewBody);
+
+                if (NewBody.Count == 0)
+                    NewBody.Add("empty");
+
+                var NewRule = string.Join(" ", NewBody);
+                
+
+                return Heading + " " + NewRule;
             }
         }
         public void AddSemanticAction(IFuntionAction SemFunctions)

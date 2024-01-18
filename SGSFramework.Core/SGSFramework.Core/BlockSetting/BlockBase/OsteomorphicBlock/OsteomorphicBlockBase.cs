@@ -8,7 +8,7 @@ using SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces;
 
 namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicBlock
 {
-    public abstract class OsteomorphicBlockBase:Block, IEquatable<OsteomorphicBlockBase>
+    public abstract class OsteomorphicBlockBase: Block, IEquatable<OsteomorphicBlockBase>
     {
         public List<Brep> BrickSolid { get; protected set; }
         public OsteoBlockface[] Face { get; protected set; }

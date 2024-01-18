@@ -188,6 +188,8 @@ namespace SGSFramework.Core.BlockSetting.LabelBlockBase_2
         {
             this.GetBlocks(Label);
             RhinoDoc Doc = RhinoDoc.ActiveDoc;
+            if(BlockObject is null)
+                this.BlockObject = new Dictionary<string, List<(GeometryBase, ObjectAttributes)>>();
             BlockObject.Add(Label, new List<(GeometryBase, ObjectAttributes)>());
             foreach (var ID in this.RhinoReferenceBlockGuid[Label])
             {
@@ -211,6 +213,8 @@ namespace SGSFramework.Core.BlockSetting.LabelBlockBase_2
         /// <returns></returns>
         public List<(GeometryBase, ObjectAttributes)> GetRhinoObj(string Label)
         {
+            if (BlockObject is null)
+                GetObjFromGuid(Label);
             if (!BlockObject.ContainsKey(Label))
                 GetObjFromGuid(Label);
             return BlockObject[Label];

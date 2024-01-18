@@ -1,61 +1,56 @@
 ﻿using Rhino.Geometry;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Rhino.DocObjects;
 using System.Drawing;
+using System.Collections.Generic;
+using System.Text;
+using Rhino.DocObjects;
 using SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces;
 
 namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicBlock
 {
-    public class OsteomorphicBlock : OsteomorphicBlockBase
+    public class OsteomorphicSlab : OsteomorphicBlockBase
     {
         public override Plane ReferencePlane { get; protected set; }
         public override string BlockType { get; protected set; }
-        public OsteomorphicBlock(OsteoBlockface face, int n = 1, int m = 1, double height = 10) : base(n, m)
+
+        public OsteomorphicSlab(OsteoBlockface face, int n = 1, int m = 1, double height = 10) : base(n, m)
         {
             this.ReferencePlane = Plane.WorldXY;
             n = n <= 0 ? 1 : n;
             m = m <= 0 ? 1 : m;
-            this.Face = new OsteoBlockface[1]{face}; 
-            this.HeightSize = height <= face.ZSize? face.ZSize + 5 : height;
-            this.BlockType = $"OsteomorphicBlock => {n} x {m} Height {height}";
+            this.Face = new OsteoBlockface[2] { face, new Planarface() };
+            this.HeightSize = height <= face.ZSize ? face.ZSize + 5 : height;
+            this.BlockType = $"OsteomorphicSlab => {n} x {m} Height {height}";
             double Unit = Util.GeneralSetting.SegUnit;
             for (int i = 0; i < n; i++)
-            {
                 for (int j = 0; j < m; j++)
                 {
-                    var TempFace = (OsteoBlockface)face.Clone();
-                    
+                    var TopFace = (OsteoBlockface)face.Clone();
+                    var Botface = new Planarface();
                     if ((i % 2 == 1 && j % 2 != 1) || (i % 2 != 1 && j % 2 == 1))
                     {
-                        TempFace.SetFlip();
-                        TempFace.FaceColor = Color.LightBlue;
+                        TopFace.SetFlip();
+                        TopFace.FaceColor = Color.YellowGreen;
+                        Botface.SetFlip();
+                        Botface.FaceColor = Color.OrangeRed;
                     }
                     else
                     {
-                        TempFace.FaceColor = Color.SteelBlue;
+                        TopFace.FaceColor = Color.LightYellow;
+                        Botface.FaceColor = Color.DarkOrange;
                     }
-                    TempFace.Location = new Plane(new Point3d(Unit * i, Unit * j, height / 2), Vector3d.ZAxis);
-                    Topfaces.Add((OsteoBlockface)TempFace.Clone());
-                    TempFace = (OsteoBlockface)face.Clone();
-                    
-                    if ((i % 2 == 1 && j % 2 != 1) || (i%2 != 1 && j % 2 == 1) )
-                    {
-                        TempFace.SetFlip();
-                        TempFace.FaceColor = Color.Green;
-                    }
-                    else
-                    {
-                        TempFace.FaceColor = Color.GreenYellow;
-                    }
-                    TempFace.Location = new Plane(new Point3d(Unit * i, Unit * j, -height / 2), Vector3d.ZAxis);
-                    TempFace.Mirror();
-                    Bottomfaces.Add(TempFace);
+                    TopFace.Location = new Plane(new Point3d(Unit * i, Unit * j, height / 2), Vector3d.ZAxis);
+                    Topfaces.Add((OsteoBlockface)TopFace.Clone());
+                    Botface.Location = new Plane(new Point3d(Unit * i, Unit * j, -height / 2), Vector3d.ZAxis);
+                    Botface.Mirror();
+                    Bottomfaces.Add(Botface);
                 }
-            }
             SetShape();
         }
+
+        public override bool Equals(OsteomorphicBlockBase other)
+        => this.BlockType == other.BlockType;
+
         protected override void SetShape()
         {
             var TopCrvs = OsteoBlockface.JoinFacesFrame(this.Topfaces);
@@ -81,8 +76,5 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicBlock
                 this.AddComponent(BottomSrfs[i], Atts);
             }
         }
-
-        public override bool Equals(OsteomorphicBlockBase other)
-         => this.BlockType == other.BlockType;
     }
 }

@@ -28,6 +28,9 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
             var Temp = new Weavyface(this.ZSize, this.IsFlip);
             Temp.Location = this.Location;
             Temp.FaceColor = this.FaceColor;
+            if (this.IsMirror)
+                Temp.Mirror();
+
             return Temp;
         }
         protected override void SetShape()

@@ -9,7 +9,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
 {
     public class Planarface : OsteoBlockface
     {
-        public override string TypeName => throw new NotImplementedException();
+        public override string TypeName { get; }
         public Planarface(bool IsFlip = false) : base(0, IsFlip) { }
         protected override Plane _AlignPlane { get; set; }
         protected override Brep _Face { get; set; }
@@ -23,11 +23,11 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
             this._Perphery = new List<Curve>()
             {
                 new LineCurve(new Point3d(-size / 2, - size / 2, 0), new Point3d(size/2, -size/2, 0)),
-                new LineCurve(new Point3d(size / 2, -size / 2, 0), new Point3d(size / 2, size / 2, 0)),
-                new LineCurve(new Point3d(size / 2, size / 2, 0), new Point3d(-size / 2, size / 2, 0)),
-                new LineCurve(new Point3d(-size / 2, size / 2, 0), new Point3d(-size / 2, -size / 2, 0))
+                new LineCurve(new Point3d(-size / 2, -size / 2, 0), new Point3d(-size / 2, size / 2, 0)),
+                new LineCurve(new Point3d(-size / 2, size / 2, 0), new Point3d(size / 2, size / 2, 0)),
+                new LineCurve(new Point3d(size / 2, -size / 2, 0), new Point3d(size / 2, size / 2, 0))
             };
-
+            this._Face = Brep.CreateEdgeSurface(this._Perphery);
             if (this.IsFlip)
             {
                 this._AlignPlane = Plane.WorldXY;
@@ -43,7 +43,13 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
 
         public override object Clone()
         {
-            return new Planarface(IsFlip);
+            var Temp = new Planarface(IsFlip);
+            Temp.Location = this.Location;
+            Temp.FaceColor = this.FaceColor;
+            if (Temp.IsMirror)
+                Temp.Mirror();
+
+            return Temp;
         }
     }
 }

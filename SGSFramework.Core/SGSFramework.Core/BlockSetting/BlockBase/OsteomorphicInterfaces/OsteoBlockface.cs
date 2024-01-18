@@ -30,6 +30,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
         {
             this.ZSize = Height;
             this.IsFlip = IsFlip;
+            this.IsMirror = false;
             SetShape();
         }
         public Plane Location { get; set; } = Plane.WorldXY;
@@ -49,6 +50,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
         /// To determine the orientation between 0 and 90 degree
         /// </summary>
         public bool IsFlip { get; private set; }
+        public bool IsMirror { get; private set; } = false;
         public double ZSize { get; protected set; }
         public abstract string TypeName { get; }
         protected abstract Brep _Face { get; set; }
@@ -99,6 +101,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase.OsteomorphicInterfaces
         {
             if (_Face == null || this._Perphery == null)
                 return false;
+            this.IsMirror = !this.IsMirror;
             var MirrorTS = Transform.Mirror(this._AlignPlane);
             this._Face.Transform(MirrorTS);
             this._Perphery = this._Perphery.Select(x => 

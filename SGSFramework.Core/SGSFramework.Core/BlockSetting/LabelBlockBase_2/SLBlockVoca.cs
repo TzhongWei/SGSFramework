@@ -14,12 +14,13 @@ namespace SGSFramework.Core.BlockSetting.LabelBlockBase_2
     public class SLBlockVoca : LabelBlock, IDiverseForms<SLBlock>
     {
         public override string LabelBlockName { get; protected set; } = "SLBlockVoca";
-
         public HashSet<SLBlock> blockList { get; set; }
         public List<int> Block_IDs { get; set; }
 
         public bool AddBlock(SLBlock block)
         {
+            if (blockList.Contains(block))
+                return false;
             if (blockList.Add(block))
             {
                 this.blockTokens.Add(block.BlockName + "_I", block.BlockName);
@@ -42,7 +43,7 @@ namespace SGSFramework.Core.BlockSetting.LabelBlockBase_2
         }
         public override void SetUpVocabulary()
         {
-            if (UnitSet == Util.GeneralSetting.SegUnit && this.blockTokens.Count > 1)
+            if (UnitSet == Util.GeneralSetting.SegUnit && this.blockTokens.Count < 1)
                 return;
             UnitSet = Util.GeneralSetting.SegUnit;
 
