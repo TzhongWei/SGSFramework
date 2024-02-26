@@ -1,3 +1,4 @@
 .vs/
-/SGSFramework.Core/SGSFramework.Core/
+SGSFramework.Core/SGSFramework.Core/
+/SGSFramework.Grasshopper/
 *.md
