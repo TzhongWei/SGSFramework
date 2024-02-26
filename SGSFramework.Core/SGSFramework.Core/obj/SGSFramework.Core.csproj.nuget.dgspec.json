@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\研究所\\SLBlock\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj": {}
+    "C:\\Users\\jy199\\OneDrive\\桌面\\Git_Test\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj": {}
   },
   "projects": {
-    "D:\\研究所\\SLBlock\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj": {
+    "C:\\Users\\jy199\\OneDrive\\桌面\\Git_Test\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\研究所\\SLBlock\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj",
+        "projectUniqueName": "C:\\Users\\jy199\\OneDrive\\桌面\\Git_Test\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj",
         "projectName": "SGSFramework.Core",
-        "projectPath": "D:\\研究所\\SLBlock\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj",
-        "packagesPath": "C:\\Users\\Username\\.nuget\\packages\\",
-        "outputPath": "D:\\研究所\\SLBlock\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\obj\\",
+        "projectPath": "C:\\Users\\jy199\\OneDrive\\桌面\\Git_Test\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj",
+        "packagesPath": "C:\\Users\\jy199\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jy199\\OneDrive\\桌面\\Git_Test\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Username\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jy199\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -48,12 +48,18 @@
               "target": "Package",
               "version": "[7.34.23267.11001, )"
             },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )",
+              "autoReferenced": true
+            },
             "RhinoCommon": {
               "target": "Package",
               "version": "[7.34.23267.11001, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
