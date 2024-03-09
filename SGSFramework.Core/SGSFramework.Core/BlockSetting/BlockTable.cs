@@ -17,7 +17,7 @@ namespace SGSFramework.Core.BlockSetting
         /// <summary>
         /// All Blocks
         /// </summary>
-        private static List<Block> Blocks = new List<Block>();
+        private static HashSet<Block> Blocks = new HashSet<Block>();
         /// <summary>
         /// Find the block with block reference ID in Rhino, it's not the index in this blocktable,
         /// if seeking for the corrosponding sequence please use Find(BlockName);
@@ -32,12 +32,11 @@ namespace SGSFramework.Core.BlockSetting
                 throw new Exception("The Index is invalid");
             for (int i = 0; i < Blocks.Count; i++)
             {
-                if (Blocks[i].Block_Id == ReferenceIndex)
-                    return Blocks[i];
+                if (Blocks.ToList()[i].Block_Id == ReferenceIndex)
+                    return Blocks.ToList()[i];
             }
             throw new Exception("The ReferenceIndex is invalid");
         }
-        public static List<string> Names => Blocks.Select(x => x.BlockName).ToList();
         /// <summary>
         /// The number blocks in block table
         /// </summary>
@@ -91,8 +90,8 @@ namespace SGSFramework.Core.BlockSetting
                 return -1;
             for (int i = 0; i < Blocks.Count; i++)
             {
-                if (Blocks[i].BlockName == BlockName)
-                    return Blocks[i].Block_Id;
+                if (Blocks.ToList()[i].BlockName == BlockName)
+                    return Blocks.ToList()[i].Block_Id;
             }
             return -1;
         }
@@ -107,7 +106,7 @@ namespace SGSFramework.Core.BlockSetting
                 return -1;
             for (int i = 0; i < Blocks.Count; i++)
             {
-                if (Blocks[i].BlockName == BlockName)
+                if (Blocks.ToList()[i].BlockName == BlockName)
                     return i;
             }
             return -1;
@@ -115,7 +114,7 @@ namespace SGSFramework.Core.BlockSetting
         /// <summary>
         /// GetAllBlocks
         /// </summary>
-        public static List<Block> AllBlocks => Blocks;
+        public static List<Block> AllBlocks => Blocks.ToList();
         /// <summary>
         /// Get Block by name
         /// </summary>
@@ -127,8 +126,8 @@ namespace SGSFramework.Core.BlockSetting
                 return null;
             for (int i = 0; i < Blocks.Count; i++)
             {
-                if (Blocks[i].BlockName == BlockName)
-                    return Blocks[i];
+                if (Blocks.ToList()[i].BlockName == BlockName)
+                    return Blocks.ToList()[i];
             }
             return null;
         }
@@ -138,12 +137,7 @@ namespace SGSFramework.Core.BlockSetting
         /// <param name="block"></param>
         /// <returns></returns>
         public static Block Find(Block block)
-        {
-            int Index = Find(block.BlockName);
-            if (Index > 0)
-                return Blocks[Index];
-            return null;
-        }
+        => FindByName(block.BlockName);
         /// <summary>
         /// Remove block
         /// </summary>
@@ -152,21 +146,24 @@ namespace SGSFramework.Core.BlockSetting
         {
             if (Blocks.Count == 0)
                 throw new Exception("No blocks are set up");
-            int ID = Find(block.BlockName);
-            if (ID < 0) return;
+            Block Ablock;
+            if ((Ablock = Find(block)) == null) return;
             else
             {
                 var Doc = RhinoDoc.ActiveDoc;
-                Doc.InstanceDefinitions.Delete(Blocks[ID].Block_Id, true, true);
-                Blocks.RemoveAt(ID);
+                Doc.InstanceDefinitions.Delete(Ablock.Block_Id, true, true);
+                Blocks.Remove(Ablock);
             }
         }
+        /// <summary>
+        /// Remove block from the block name
+        /// </summary>
+        /// <param name="BlockName"></param>
         public static void Remove(string BlockName)
         {
             if (HasNamed(BlockName))
             {
-                var index = Find(BlockName);
-                Blocks.RemoveAt(index);
+                Blocks.Remove(FindByName(BlockName));
             }
             var Doc = RhinoDoc.ActiveDoc;
             int ID;
@@ -176,24 +173,42 @@ namespace SGSFramework.Core.BlockSetting
             }
 
         }
+        /// <summary>
+        /// Remove All the block instance in Rhino
+        /// </summary>
         public static void Clear()
         {
-            for (int i = 0; i < Blocks.Count; i++)
+            var Doc = RhinoDoc.ActiveDoc;
+            foreach (var Block in Blocks)
             {
-                var Doc = RhinoDoc.ActiveDoc;
-                var InstanceObj = Doc.InstanceDefinitions.Find(Blocks[i].BlockName);
-                if(!(InstanceObj is null))
+                var InstanceObj = Doc.InstanceDefinitions.Find(Block.BlockName);
+                if (!(InstanceObj is null))
                 {
-                    bool Result = Doc.InstanceDefinitions.Delete(InstanceObj);
+                    Doc.InstanceDefinitions.Delete(InstanceObj);
                 }
             }
             Blocks.Clear();
+        }
+        /// <summary>
+        /// Load blocks from Rhino with 
+        /// </summary>
+        /// <param name="SaveNameID"></param>
+        /// <returns></returns>
+        public static bool LoadBlock(string SaveNameID = "SGSFramework") 
+        {
+            var Doc = RhinoDoc.ActiveDoc;
+            foreach (var block in Doc.InstanceDefinitions)
+            {
+                  
+            }
+             
+            return BlockTable.AllBlocks.Count == 0;
         }
         public static void DisplayGeometries(string blockName, out List<GeometryBase> Geom, out List<Color> colors)
         {
             if ((Find(blockName) != -1 ))
             {
-                var block = Blocks[Find(blockName)];
+                var block = FindByName(blockName);
                 block.DisplayGeometries(out Geom, out colors);
             }
             else

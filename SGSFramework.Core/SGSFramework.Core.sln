@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.7.34221.43
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGSFramework.Core", "SGSFramework.Core\SGSFramework.Core.csproj", "{D79258F7-7C6E-4A35-B4E3-B39E2DE500B0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGSFramework.Grasshopper", "SGSFramework.Grasshopper\SGSFramework.Grasshopper.csproj", "{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +21,6 @@ Global
 		{D79258F7-7C6E-4A35-B4E3-B39E2DE500B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D79258F7-7C6E-4A35-B4E3-B39E2DE500B0}.Release|x64.ActiveCfg = Release|x64
 		{D79258F7-7C6E-4A35-B4E3-B39E2DE500B0}.Release|x64.Build.0 = Release|x64
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Debug|x64.Build.0 = Debug|Any CPU
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Release|x64.ActiveCfg = Release|Any CPU
-		{44CF206B-3ED3-44DD-A690-ECDCA3155C9C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

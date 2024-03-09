@@ -159,6 +159,12 @@ namespace SGSFramework.Core.BlockSetting.BlockBase
             else
                 LayerID = Doc.Layers.FindName(blockAttribute.LayerName).Index;
 
+            if (this.blockAttribute.SaveNameID == null)
+                this.blockAttribute.SetIDName("SGSFramework");
+            else
+                this.blockAttribute.SetIDName(this.blockAttribute.SaveNameID);
+
+
             string Description = blockAttribute.Description == " " ? blockAttribute.Description : BlockType;
 
             if (blockAttribute._attributes.Count != this.Components.Count)

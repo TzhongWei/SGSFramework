@@ -1,13 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "szAd7H8w105JlCL4T9lDY0bfzL95PspKbXiAgZFonjSTbrAzLrrzMM291VwHXGNjU9IsIxcP6heV0Z6gIjwL1w==",
+  "dgSpecHash": "ytBnI+ArmPZUrmlLueMg5+TWoZbCl1BmYahNGuJQfimLT5UnoJSJ6iu47lyxmj2N0btkjynDQL7uJ4eGXKCfvw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jy199\\OneDrive\\桌面\\Git_Test\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj",
+  "projectFilePath": "D:\\研究所\\SLBlock\\SGSFramework\\SGSFramework.Core\\SGSFramework.Core\\SGSFramework.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\jy199\\.nuget\\packages\\grasshopper\\7.34.23267.11001\\grasshopper.7.34.23267.11001.nupkg.sha512",
-    "C:\\Users\\jy199\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
-    "C:\\Users\\jy199\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net48\\1.0.3\\microsoft.netframework.referenceassemblies.net48.1.0.3.nupkg.sha512",
-    "C:\\Users\\jy199\\.nuget\\packages\\rhinocommon\\7.34.23267.11001\\rhinocommon.7.34.23267.11001.nupkg.sha512"
+    "C:\\Users\\Username\\.nuget\\packages\\grasshopper\\7.34.23267.11001\\grasshopper.7.34.23267.11001.nupkg.sha512",
+    "C:\\Users\\Username\\.nuget\\packages\\rhinocommon\\7.34.23267.11001\\rhinocommon.7.34.23267.11001.nupkg.sha512"
   ],
   "logs": []
 }

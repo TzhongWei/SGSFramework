@@ -21,6 +21,11 @@ namespace SGSFramework.Core.BlockSetting
     public class BlockBaseOption
     {
         /// <summary>
+        /// This is a ID name to save in the block userString in objectAttribute.
+        /// </summary>
+        private string _SaveNameID = null;
+        public string SaveNameID { get { return _SaveNameID; } set { _SaveNameID = value; } }
+        /// <summary>
         /// Customdata setting for a block
         /// </summary>
         public Dictionary<string, object> CustomData = new Dictionary<string, object>();
@@ -83,7 +88,7 @@ namespace SGSFramework.Core.BlockSetting
                 if (value != " " || value != string.Empty)
                     this._BlockName = value;
                 else
-                    this._BlockName = Util.Util.SetGibberish();
+                    this._BlockName = "SGSFrameBlock_" + Util.Util.SetGibberish();
             }
         }
         /// <summary>
@@ -101,7 +106,7 @@ namespace SGSFramework.Core.BlockSetting
                 if (value != " " || value != string.Empty)
                     this._LayerName = value;
                 else
-                    this._LayerName = Util.Util.SetGibberish();
+                    this._LayerName = "SGSFrameworkLayer_" + Util.Util.SetGibberish();
             }
         }
         public void SetAttrubuteLayer(int LayerID)
@@ -109,6 +114,13 @@ namespace SGSFramework.Core.BlockSetting
             for (int i = 0; i < this._attributes.Count; i++)
             {
                 this._attributes[i].LayerIndex = LayerID;
+            }
+        }
+        public void SetIDName(string NewName)
+        {
+            for (int i = 0; i < this._attributes.Count; i++)
+            {
+                this._attributes[i].SetUserString("SGSFrameworkID", this._SaveNameID);
             }
         }
     }
