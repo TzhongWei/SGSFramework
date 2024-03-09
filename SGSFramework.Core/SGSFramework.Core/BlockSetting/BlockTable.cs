@@ -202,7 +202,7 @@ namespace SGSFramework.Core.BlockSetting
                   
             }
              
-            return BlockTable.AllBlocks.Count == 0;
+            return BlockTable.AllBlocks.Count != 0;
         }
         public static void DisplayGeometries(string blockName, out List<GeometryBase> Geom, out List<Color> colors)
         {
