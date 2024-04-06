@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using Grasshopper.Kernel;
 using Rhino;
 using SGSFramework.Core.BlockSetting;
@@ -21,12 +21,19 @@ namespace SGSFramework.Core.BlockSetting
     public class BlockBaseOption
     {
         /// <summary>
+        /// To notify if the colour is reset
+        /// </summary>
+        public bool IsResetColour { get; private set; } = false;
+        /// <summary>
         /// This is a ID name to save in the block userString in objectAttribute.
         /// </summary>
-        private string _SaveNameID = null;
-        public string SaveNameID { get { return _SaveNameID; } set { _SaveNameID = value; } }
+        private string _SaveNameURL = "SGSFrameworkID";
         /// <summary>
-        /// Customdata setting for a block
+        /// The URL for this SGS framework
+        /// </summary>
+        public string SaveNameURL { get { return _SaveNameURL; } set { _SaveNameURL = value; } }
+        /// <summary>
+        /// Custom data setting for a block
         /// </summary>
         public Dictionary<string, object> CustomData = new Dictionary<string, object>();
         /// <summary>
@@ -76,9 +83,9 @@ namespace SGSFramework.Core.BlockSetting
         /// <summary>
         /// Set a Block Name
         /// </summary>
-        public string BlockName 
-        { 
-            get 
+        public string BlockName
+        {
+            get
             {
                 return this._BlockName;
             }
@@ -116,11 +123,33 @@ namespace SGSFramework.Core.BlockSetting
                 this._attributes[i].LayerIndex = LayerID;
             }
         }
-        public void SetIDName(string NewName)
+        private List<Color> _Colours = new List<Color>();
+        public List<Color> Colours { get {
+                if (this._attributes == null || !this.IsResetColour)
+                    return new List<Color> { Color.Black };
+                if (_Colours.Count < this._attributes.Count)
+                {
+                    for (int i = _Colours.Count - 1; i < this._attributes.Count; i++)
+                        _Colours.Add(_Colours.Last());
+                    return _Colours;
+                }
+                else
+                    return _Colours;
+            } }
+        public void SetColours(List<Color> Colours)
+        {
+            this.IsResetColour = true;
+            this._Colours = Colours;
+        }
+        /// <summary>
+        /// Only used in Block.cs
+        /// </summary>
+        internal void FinaliseColour()
         {
             for (int i = 0; i < this._attributes.Count; i++)
             {
-                this._attributes[i].SetUserString("SGSFrameworkID", this._SaveNameID);
+                this._attributes[i].ColorSource = ObjectColorSource.ColorFromObject;
+                this._attributes[i].ObjectColor = this.Colours[i];
             }
         }
     }

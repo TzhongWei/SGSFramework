@@ -45,7 +45,7 @@ namespace SGSFramework.Core.BlockSetting.LabelBlockBase_2
         /// <summary>
         /// Not allow to use labelblocktable default constructor
         /// </summary>
-        private LabelBlockTable() { Isinvalid = true; }
+        internal LabelBlockTable() { Isinvalid = true; }
         /// <summary>
         /// The label shape set is ready to be called out
         /// </summary>

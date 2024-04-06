@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SGSFramework.Core.Parser.Grammar;
+using SGSFramework.Core.Grammar;
 
 namespace SGSFramework.Core.Parser.LRParseing
 {
@@ -11,7 +11,7 @@ namespace SGSFramework.Core.Parser.LRParseing
       : BaseLRParsing<TAction, LR0KernelItem>
       where TAction : class, IAction
     {
-        public BaseLR0Parsing(CFGGrammar grammar) : base(grammar)
+        public BaseLR0Parsing(SGSGrammar grammar) : base(grammar)
         { }
         protected override Kernel<LR0KernelItem> CreateInitialKernel()
             => new Kernel<LR0KernelItem>
@@ -157,7 +157,7 @@ namespace SGSFramework.Core.Parser.LRParseing
                     //Find every unused production with token as the head and
                     //initalise a new kernel item at index 0 of that production
                     foreach (ProductionRule production
-                            in this.cfgGrammar.productions)
+                            in this.cfgGrammar.ProductionRules)
                     {
                         if (!used.Contains(production)
                             && production.Head.Equals(token))

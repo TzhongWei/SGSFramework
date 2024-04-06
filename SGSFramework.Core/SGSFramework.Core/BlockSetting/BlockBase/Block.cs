@@ -12,6 +12,9 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
 
+//Unfinished list
+//Load from Rhino block need to test if can read information from GeometryBase
+
 namespace SGSFramework.Core.BlockSetting.BlockBase
 {
     /// <summary>
@@ -23,6 +26,16 @@ namespace SGSFramework.Core.BlockSetting.BlockBase
     /// </summary>
     public abstract class Block : IEquatable<Block>
     {
+        /// <summary>
+        /// Internalise a block from outsource
+        /// </summary>
+        /// <param name="InstanceFromRhino"></param>
+        internal Block(InstanceDefinition InstanceFromRhino)
+        {
+
+            //ReadFromRhino(InstanceFromRhino);
+        }
+        //abstract bool ReadFromRhino(InstanceDefinition RhinoBlock);
         /// <summary>
         /// Constructor, it can only be set up with the inherited classes
         /// </summary>
@@ -159,11 +172,6 @@ namespace SGSFramework.Core.BlockSetting.BlockBase
             else
                 LayerID = Doc.Layers.FindName(blockAttribute.LayerName).Index;
 
-            if (this.blockAttribute.SaveNameID == null)
-                this.blockAttribute.SetIDName("SGSFramework");
-            else
-                this.blockAttribute.SetIDName(this.blockAttribute.SaveNameID);
-
 
             string Description = blockAttribute.Description == " " ? blockAttribute.Description : BlockType;
 
@@ -172,7 +180,13 @@ namespace SGSFramework.Core.BlockSetting.BlockBase
 
             this.blockAttribute.SetAttrubuteLayer(LayerID);
 
-            this.Block_Id = Doc.InstanceDefinitions.Add(Name, Description, ReferencePlane.Origin, Components, blockAttribute._attributes);
+            if (this.blockAttribute.IsResetColour)
+            {
+                this.blockAttribute.FinaliseColour();
+            }
+
+            this.Block_Id = Doc.InstanceDefinitions.Add(Name, Description,this.blockAttribute.SaveNameURL, 
+                "the url for SGSFramework", ReferencePlane.Origin, Components, blockAttribute._attributes);
 
             //Final Check
             if (this.Block_Id > -1)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SGSFramework.Core.Parser.Grammar;
+using SGSFramework.Core.Grammar;
 using SGSFramework.Core.Parser.LRParseing.ParingInterface;
 
 namespace SGSFramework.Core.Parser.LRParseing.LALR
@@ -208,7 +208,7 @@ namespace SGSFramework.Core.Parser.LRParseing.LALR
     */
     public class LALR1Parsing : BaseLR1Parsing<LALR1Action, LALR1KernelItem>
     {
-        public LALR1Parsing(CFGGrammar cfgGrammar) : base(cfgGrammar) { }
+        public LALR1Parsing(SGSGrammar cfgGrammar) : base(cfgGrammar) { }
         protected override LALR1KernelItem CreateKernelItem
             (ProductionRule production, int index, IEnumerable<string> lookAheads)
             => new LALR1KernelItem(production, index, lookAheads);

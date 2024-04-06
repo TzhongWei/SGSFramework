@@ -33,6 +33,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase
         }
         private SLBlock():base() 
         {
+
             this.OriginPoint = new Point3d(0, 0, 0);
             this.ReferencePlane = new Plane(this.OriginPoint + new Vector3d(SLBlock.size * 2, 0, 0), Vector3d.ZAxis);
             this.blockAttribute = null;
@@ -110,7 +111,7 @@ namespace SGSFramework.Core.BlockSetting.BlockBase
         private static int size = 10;
         public static int Count { get; private set; } = 0;
         private static bool _flip = true;
-        private Color BlockColours;
+        private Color BlockColours = Color.Black;
         protected override void SetShape()
         {
             if (!(this._slblock is null)) return;

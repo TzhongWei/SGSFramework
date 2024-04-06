@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SGSFramework.Core.Parser.LRParseing.ParingInterface;
-using SGSFramework.Core.Parser.Grammar;
+//using SGSFramework.Core.Parser.Grammar;
+using SGSFramework.Core.Grammar;
 
 namespace SGSFramework.Core.Parser.LRParseing
 {
     public abstract class BaseParsing<TAction> : IParsing<TAction>
         where TAction : class, IAction
     {
-        public CFGGrammar cfgGrammar { get; private set; }
+        public SGSGrammar cfgGrammar { get; private set; }
         public ParsingTable<TAction> ParsingTable { get; protected set; }
-        protected BaseParsing(CFGGrammar cfgGrammar)
+        protected BaseParsing(SGSGrammar cfgGrammar)
         {
             this.cfgGrammar = cfgGrammar;
         }

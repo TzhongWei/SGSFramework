@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SGSFramework.Core.Parser.Grammar;
+using SGSFramework.Core.Grammar;
 using SGSFramework.Core.Parser.LRParseing.ParingInterface;
 
 namespace SGSFramework.Core.Parser.LRParseing.SLR
@@ -139,7 +139,7 @@ namespace SGSFramework.Core.Parser.LRParseing.SLR
      */
     public class SLR1Parsing : BaseLR0Parsing<SLR1Action>
     {
-        public SLR1Parsing(CFGGrammar cfggrammar) : base(cfggrammar) { }
+        public SLR1Parsing(SGSGrammar cfggrammar) : base(cfggrammar) { }
         public override void Classify()
          => this.ClassifyLR1(this.CreateParsingTable());
         public override IParsingTable<SLR1Action> CreateParsingTable()

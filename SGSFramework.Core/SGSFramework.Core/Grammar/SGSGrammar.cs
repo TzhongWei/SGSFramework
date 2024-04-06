@@ -65,6 +65,24 @@ namespace SGSFramework.Core.Grammar
             this.SemanticRules = new List<SemanticRule>();
             this._tokens = new HashSet<string>();
         }
+        /// <summary>
+        /// This Setting is for parser testing only, whose Semantic rules cannot function.
+        /// </summary>
+        /// <param name="Rules"></param>
+        public SGSGrammar(IEnumerable<string> Rules)
+        {
+            //Need to generate a fake labelblockTable
+            
+            
+            this.labelBlockTable = new LabelBlockTable();
+
+
+
+
+            this.AddPreprocessor(new DefinedMacro());
+            OriginalRule = Rules.ToList();
+
+        }
         public SGSGrammar(IEnumerable<string> Rules, LabelBlockTable labelBlockTable) : this()
         {
             this.labelBlockTable = labelBlockTable;

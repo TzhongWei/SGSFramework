@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SGSFramework.Core.Parser.Grammar;
+using SGSFramework.Core.Grammar;
 using SGSFramework.Core.Parser.LRParseing.ParingInterface;
 
 namespace SGSFramework.Core.Parser.LRParseing
@@ -13,7 +13,7 @@ namespace SGSFramework.Core.Parser.LRParseing
         where TKernelItem: BaseLR0KernelItem, IEquatable<TKernelItem>
     {
         public IAutomaton<TKernelItem> Automaton { get; protected set; }
-        protected BaseLRParsing(CFGGrammar cfgGrammar) : base(cfgGrammar) { }
+        protected BaseLRParsing(SGSGrammar cfgGrammar) : base(cfgGrammar) { }
         #region abstract implementaion
         /// <summary>
         /// Create the first kernel item for usage in the automaton, this usually

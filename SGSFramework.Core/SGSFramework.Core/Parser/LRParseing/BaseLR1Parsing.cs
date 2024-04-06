@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SGSFramework.Core.Parser.Grammar;
+using SGSFramework.Core.Grammar;
 
 namespace SGSFramework.Core.Parser.LRParseing
 {
@@ -12,7 +12,7 @@ namespace SGSFramework.Core.Parser.LRParseing
         where TAction : BaseLR1ActionDictionary<TKernelItem>
         where TKernelItem : BaseLR1KernelItem, IEquatable<TKernelItem>
     {
-        public BaseLR1Parsing(CFGGrammar cfgGrammar) : base(cfgGrammar)
+        public BaseLR1Parsing(SGSGrammar cfgGrammar) : base(cfgGrammar)
         { }
         protected TKernelItem CreateKernelItem
             (ProductionRule production, int index, params string[] lookAheads)
@@ -30,7 +30,7 @@ namespace SGSFramework.Core.Parser.LRParseing
         protected override Kernel<TKernelItem> CreateClosure(Kernel<TKernelItem> kernel)
         {
             string start = this.cfgGrammar.ComputeStartNonTerminal();
-            HashSet<string> nonterminal = this.cfgGrammar.ComputeNonTerminals();
+            HashSet<string> nonterminal = this.cfgGrammar.ComputeNonterminals();
             Dictionary<ProductionRule, HashSet<string>> used = new Dictionary<ProductionRule, HashSet<string>>();
             Kernel<TKernelItem> result;
             //These are arrays because they get to be used for multiple times
@@ -40,7 +40,7 @@ namespace SGSFramework.Core.Parser.LRParseing
             TKernelItem item;
 
             //Ensure every token can only be use once as look-ahead
-            foreach (ProductionRule production in this.cfgGrammar.productions)
+            foreach (ProductionRule production in this.cfgGrammar.ProductionRules)
             {
                 used.Add(production, new HashSet<string>());
             }
@@ -121,7 +121,7 @@ namespace SGSFramework.Core.Parser.LRParseing
                     //Find all productions for the current first token of the
                     //remaining set
 
-                    foreach (var Production in this.cfgGrammar.productions)
+                    foreach (var Production in this.cfgGrammar.ProductionRules)
                     {
                         if (!Production.Head.Equals(token))
                             continue;

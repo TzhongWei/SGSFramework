@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGSFramework.Core.Parser.Grammar
 {
+    [Obsolete("This namespace is no-longer available", true)]
     public class Relation
     {
         //A dictionary signifying a relation between a token and 0 or more

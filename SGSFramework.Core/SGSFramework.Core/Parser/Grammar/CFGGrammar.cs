@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGSFramework.Core.Parser.Grammar
 {
+    [Obsolete("This namespace is no-longer available", true)]
     public class CFGGrammar
     {
         public IReadOnlyList<ProductionRule> productions => _productions;

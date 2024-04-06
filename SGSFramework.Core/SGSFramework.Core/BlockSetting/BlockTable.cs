@@ -199,7 +199,10 @@ namespace SGSFramework.Core.BlockSetting
             var Doc = RhinoDoc.ActiveDoc;
             foreach (var block in Doc.InstanceDefinitions)
             {
-                  
+                if (block.Url == SaveNameID)
+                {
+                    
+                }
             }
              
             return BlockTable.AllBlocks.Count != 0;

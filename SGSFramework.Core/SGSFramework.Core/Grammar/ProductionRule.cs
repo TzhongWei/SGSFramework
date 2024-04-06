@@ -103,7 +103,7 @@ namespace SGSFramework.Core.Grammar
     /// Only and only if Semantic Rule contains placing block.
     /// Each label need to be seperated with a space " ".
     /// </summary>
-    public class ProductionRule : IRule<string>
+    public class ProductionRule : IRule<string>, IEquatable<ProductionRule>
     {
         public string Head { get; private set; }
 

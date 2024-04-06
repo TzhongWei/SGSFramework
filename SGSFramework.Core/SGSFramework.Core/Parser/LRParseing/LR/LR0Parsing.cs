@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SGSFramework.Core.Parser.Grammar;
+using SGSFramework.Core.Grammar;
 using SGSFramework.Core.Parser.LRParseing.ParingInterface;
 
 namespace SGSFramework.Core.Parser.LRParseing
@@ -134,7 +134,7 @@ namespace SGSFramework.Core.Parser.LRParseing
     ///</summary>
     public class LR0Parsing : BaseLR0Parsing<LR0Action>
     {
-        public LR0Parsing(CFGGrammar grammar) : base(grammar)
+        public LR0Parsing(SGSGrammar grammar) : base(grammar)
         {}
         public override void Classify()
         {

@@ -12,6 +12,7 @@ namespace SGSFramework.Core.Parser.Grammar
     /// The production rule only accept string, the rule input will be 
     /// segmentised into words for parsing
     /// </summary>
+    [Obsolete("This namespace is no-longer available", true)]
     public class ProductionRule : IRule<string>, IEquatable<ProductionRule>
     {
         //The head token which is always a non-terminal

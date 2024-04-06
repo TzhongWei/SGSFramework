@@ -7,3 +7,11 @@ D:\研究所\SLBlock\StringGRxShape_Compiler\SGSFramework.Core\SGSFramework.Core
 D:\研究所\SLBlock\StringGRxShape_Compiler\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.csproj.CoreCompileInputs.cache
 D:\研究所\SLBlock\StringGRxShape_Compiler\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.dll
 D:\研究所\SLBlock\StringGRxShape_Compiler\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.pdb
+D:\研究所\SLBlock\SGSFramework\bin\Release\net48\SGSFramework.Core.dll
+D:\研究所\SLBlock\SGSFramework\bin\Release\net48\SGSFramework.Core.pdb
+D:\研究所\SLBlock\SGSFramework\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\研究所\SLBlock\SGSFramework\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.AssemblyInfoInputs.cache
+D:\研究所\SLBlock\SGSFramework\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.AssemblyInfo.cs
+D:\研究所\SLBlock\SGSFramework\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.csproj.CoreCompileInputs.cache
+D:\研究所\SLBlock\SGSFramework\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.dll
+D:\研究所\SLBlock\SGSFramework\SGSFramework.Core\SGSFramework.Core\obj\Release\net48\SGSFramework.Core.pdb
